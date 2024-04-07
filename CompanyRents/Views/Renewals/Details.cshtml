@@ -1,0 +1,79 @@
+﻿@model RenewalViewModel
+
+@{
+    ViewData["Title"] = "تفاصيل تجديد";
+}
+
+<div class="row">
+    <div class="col-12">
+        <h3 class="text-center mb-5">تفاصيل تجديد</h3>
+
+        <form asp-action="Create" enctype="multipart/form-data" id="myForm">
+            <div class="row mb-3">
+                <div class="col-4">
+                    <label class="form-label" asp-for="LessorId"></label>
+                    <select asp-for="LessorId" asp-items="Model.LessorSelectList" class="form-control" disabled>
+                        <option disabled selected>اختار العقد</option>
+                    </select>
+                </div>
+                <div class="col-4">
+                    <label class="form-label" asp-for="AgreementNumber"></label>
+                    <input class="form-control" asp-for="AgreementNumber" disabled>
+                </div>
+                <div class="col-4">
+                    <label class="form-label" asp-for="AgreementDateString"></label>
+                    <input class="form-control" asp-for="AgreementDateString" disabled>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-3">
+                    <label class="form-label" asp-for="RenewalPeriod"></label>
+                    <input class="form-control" asp-for="RenewalPeriod" disabled>
+                </div>
+                <div class="col-3">
+                    <label class="form-label" asp-for="StartDateString"></label>
+                    <input class="form-control" asp-for="StartDateString" disabled>
+                </div>
+                <div class="col-3">
+                    <label class="form-label" asp-for="EndDateString"></label>
+                    <input class="form-control" asp-for="EndDateString" disabled>
+                </div>
+                <div class="col-3">
+                    <label class="form-label" asp-for="ParticipationRatio"></label>
+                    <input class="form-control" asp-for="ParticipationRatio" disabled>
+                    <span class="text-danger" asp-validation-for="ParticipationRatio"></span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-4">
+                    <label class="form-label" asp-for="Amount"></label>
+                    <input class="form-control" asp-for="Amount" disabled>
+                </div>
+                <div class="col-4">
+                    <label class="form-label" asp-for="TaxRatio"></label>
+                    <input class="form-control" asp-for="TaxRatio" disabled>
+                </div>
+                <div class="col-4">
+                    <label class="form-label" asp-for="TotalAmount"></label>
+                    <input class="form-control" asp-for="TotalAmount" disabled>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <label class="form-label" asp-for="Notes"></label>
+                    <textarea class="form-control" asp-for="Notes" disabled></textarea>
+                </div>
+                <div class="col-6">
+                    <a
+                        class="btn btn-secondary"
+                        asp-action="DownloadFile"
+                        asp-controller="Renewals"
+                        asp-route-fileName="@Model.AgreementDocumentFileName">
+                        تحميل المرفق
+                    </a>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>

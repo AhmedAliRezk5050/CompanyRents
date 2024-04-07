@@ -1,0 +1,116 @@
+﻿@using Infrastructure.Utility
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+        @ViewData["Title"] -
+         الايجارات
+    </title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.rtl.min.css"
+          integrity="sha384-gXt9imSW0VcJVHezoNQsP+TNrjYXoGcrqBZJpry9zJt8PCQjobwmhMGaDHTASo9N" crossorigin="anonymous">
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link href="~/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark mb-5">
+            <div class="container-fluid">
+                <a class="navbar-brand navbar_logo-container" asp-area="" asp-controller="Home" asp-action="Index">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse">
+                    <ul class="navbar-nav flex-grow-1">
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            @if (User.HasClaim("Permission", Permissions.Lessors.View))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link @((ViewContext.RouteData.Values["Controller"]?.ToString() == "Funders") ? "active" : "")"
+                                       asp-controller="Lessors" asp-action="Index">
+                                        الايجارات
+                                    </a>
+                                </li>
+                            }
+                            @if (User.HasClaim("Permission", Permissions.Renewals.View))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link @((ViewContext.RouteData.Values["Controller"]?.ToString() == "Contracts") ? "active" : "")"
+                                       asp-controller="Renewals" asp-action="Index">
+                                        تجديدات العقود
+                                    </a>
+                                </li>
+                            }
+                            @if (User.HasClaim("Permission", Permissions.Invoices.View))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link @((ViewContext.RouteData.Values["Controller"]?.ToString() == "Destructions") ? "active" : "")"
+                                       asp-controller="Invoices" asp-action="Index">
+                                        الفواتير
+                                    </a>
+                                </li>
+                            }
+                            @if (User.HasClaim("Permission", Permissions.Payments.View))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link @((ViewContext.RouteData.Values["Controller"]?.ToString() == "Destructions") ? "active" : "")"
+                                       asp-controller="Payments" asp-action="Index">
+                                        السدادات
+                                    </a>
+                                </li>
+                            }
+                            
+                            @if (User.HasClaim("Permission", Permissions.Users.View))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link @((ViewContext.RouteData.Values["Controller"]?.ToString() == "Users") ? "active" : "")"
+                                       asp-controller="Users" asp-action="Index">
+                                        المستخدمين
+                                    </a>
+                                </li>
+                            }
+                            <li class="nav-item dropstart ms-0 ms-sm-auto">
+                                <a class="nav-link dropdown-toggle btn-lg" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    @User.Identity.Name
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li>
+                                        <a asp-controller="Users" asp-action="ChangePassword" class="dropdown-item">تغيير كلمة المرور</a>
+                                    </li>
+                                    <li>
+                                        <form asp-area="Identity" asp-controller="Users" asp-action="Logout" method="post">
+                                            <button type="submit" class="dropdown-item">تسجيل خروج</button>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+<div class="container-fluid">
+    @RenderBody()
+</div>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.1/moment.min.js"></script>
+<script src="~/js/bootstrap-hijri-datetimepicker.min.js"></script>
+
+@await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

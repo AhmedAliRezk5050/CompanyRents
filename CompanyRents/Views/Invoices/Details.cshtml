@@ -1,0 +1,71 @@
+﻿@model InvoiceViewModel
+
+@{
+    ViewData["Title"] = "تفاصيل فاتورة";
+}
+
+<div class="row">
+    <div class="col-12">
+        <h3 class="text-center mb-5">تفاصيل فاتورة</h3>
+
+        <form asp-action="Create" enctype="multipart/form-data" id="myForm">
+            <div class="row mb-3">
+                <div class="col-6">
+                    <label class="form-label" asp-for="LessorId"></label>
+                    <select asp-for="LessorId" asp-items="Model.LessorSelectList" class="form-control" id="lessorList" disabled>
+                        <option disabled selected>اختار العقد</option>
+                    </select>
+                </div>
+
+                <div class="col-6" id="agreementNumberContainer">
+                    <label class="form-label" asp-for="AgreementNumber"></label>
+                    <input class="form-control" asp-for="AgreementNumber" disabled>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-4">
+                    <label class="form-label" asp-for="Number"></label>
+                    <input class="form-control" asp-for="Number" disabled>
+                </div>
+                <div class="col-4">
+                    <label class="form-label" asp-for="Amount"></label>
+                    <input class="form-control" asp-for="Amount" disabled>
+                </div>
+                <div class="col-4">
+                    <label class="form-label" asp-for="BankAccountNumber"></label>
+                    <input class="form-control" asp-for="BankAccountNumber" disabled>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-4">
+                    <label class="form-label" asp-for="InvoiceDate"></label>
+                    <input class="form-control" asp-for="InvoiceDate" type="date" disabled>
+                </div>
+                <div class="col-4">
+                    <label class="form-label" asp-for="From"></label>
+                    <input class="form-control" asp-for="From" type="date" disabled>
+                </div>
+                <div class="col-4">
+                    <label class="form-label" asp-for="To"></label>
+                    <input class="form-control" asp-for="To" type="date" disabled>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-6">
+                    <label class="form-label" asp-for="Notes"></label>
+                    <textarea class="form-control" asp-for="Notes" disabled></textarea>
+                </div>
+                <div class="col-6">
+                    <a
+                        class="btn btn-secondary"
+                        asp-action="DownloadFile"
+                        asp-controller="Renewals"
+                        asp-route-fileName="@Model.InvoiceDocumentFileName">
+                        تحميل المرفق
+                    </a>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>

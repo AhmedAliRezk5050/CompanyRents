@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="invoicesInfo" targetNamespace="http://tempuri.org/invoicesInfo.xsd" xmlns:mstns="http://tempuri.org/invoicesInfo.xsd" xmlns="http://tempuri.org/invoicesInfo.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="invoicesInfo" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_UserDSName="invoicesInfo" msprop:Generator_DataSetName="invoicesInfo">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="invoicesInfo" msprop:Generator_RowEvHandlerName="invoicesInfoRowChangeEventHandler" msprop:Generator_RowDeletedName="invoicesInfoRowDeleted" msprop:Generator_RowDeletingName="invoicesInfoRowDeleting" msprop:Generator_RowEvArgName="invoicesInfoRowChangeEvent" msprop:Generator_TablePropName="_invoicesInfo" msprop:Generator_RowChangedName="invoicesInfoRowChanged" msprop:Generator_RowChangingName="invoicesInfoRowChanging" msprop:Generator_TableClassName="invoicesInfoDataTable" msprop:Generator_RowClassName="invoicesInfoRow" msprop:Generator_TableVarName="tableinvoicesInfo" msprop:Generator_UserTableName="invoicesInfo">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="PrintDate" msprop:Generator_ColumnPropNameInRow="PrintDate" msprop:Generator_ColumnPropNameInTable="PrintDateColumn" msprop:Generator_ColumnVarNameInTable="columnPrintDate" msprop:Generator_UserColumnName="PrintDate" type="xs:string" minOccurs="0" />
+              <xs:element name="User" msprop:Generator_ColumnPropNameInRow="User" msprop:Generator_ColumnPropNameInTable="UserColumn" msprop:Generator_ColumnVarNameInTable="columnUser" msprop:Generator_UserColumnName="User" type="xs:string" minOccurs="0" />
+              <xs:element name="ContractNumber" msprop:Generator_ColumnPropNameInRow="ContractNumber" msprop:Generator_ColumnPropNameInTable="ContractNumberColumn" msprop:Generator_ColumnVarNameInTable="columnContractNumber" msprop:Generator_UserColumnName="ContractNumber" type="xs:string" minOccurs="0" />
+              <xs:element name="AgreementNumber" msprop:Generator_ColumnPropNameInRow="AgreementNumber" msprop:Generator_ColumnPropNameInTable="AgreementNumberColumn" msprop:Generator_ColumnVarNameInTable="columnAgreementNumber" msprop:Generator_UserColumnName="AgreementNumber" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

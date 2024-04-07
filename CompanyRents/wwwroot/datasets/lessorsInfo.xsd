@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="lessorsInfo" targetNamespace="http://tempuri.org/lessorsInfo.xsd" xmlns:mstns="http://tempuri.org/lessorsInfo.xsd" xmlns="http://tempuri.org/lessorsInfo.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="lessorsInfo" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_UserDSName="lessorsInfo" msprop:Generator_DataSetName="lessorsInfo">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="lessorsInfo" msprop:Generator_RowEvHandlerName="lessorsInfoRowChangeEventHandler" msprop:Generator_RowDeletedName="lessorsInfoRowDeleted" msprop:Generator_RowDeletingName="lessorsInfoRowDeleting" msprop:Generator_RowEvArgName="lessorsInfoRowChangeEvent" msprop:Generator_TablePropName="_lessorsInfo" msprop:Generator_RowChangedName="lessorsInfoRowChanged" msprop:Generator_RowChangingName="lessorsInfoRowChanging" msprop:Generator_TableClassName="lessorsInfoDataTable" msprop:Generator_RowClassName="lessorsInfoRow" msprop:Generator_TableVarName="tablelessorsInfo" msprop:Generator_UserTableName="lessorsInfo">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="PrintDate" msprop:Generator_ColumnPropNameInRow="PrintDate" msprop:Generator_ColumnPropNameInTable="PrintDateColumn" msprop:Generator_ColumnVarNameInTable="columnPrintDate" msprop:Generator_UserColumnName="PrintDate" type="xs:string" minOccurs="0" />
+              <xs:element name="User" msprop:Generator_ColumnPropNameInRow="User" msprop:Generator_ColumnPropNameInTable="UserColumn" msprop:Generator_ColumnVarNameInTable="columnUser" msprop:Generator_UserColumnName="User" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

@@ -1,0 +1,290 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>aspnet-CompanyRents-a29e139e-1501-42ce-8940-aaf2883e8f3a</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="wwwroot\datasets\cars.Designer.cs" />
+    <Content Remove="wwwroot\datasets\cars.xsc" />
+    <Content Remove="wwwroot\datasets\cars.xsd" />
+    <Content Remove="wwwroot\datasets\cars.xss" />
+    <Content Remove="wwwroot\datasets\filteredRenewalsInfo.Designer.cs" />
+    <Content Remove="wwwroot\datasets\filteredRenewalsInfo.xsc" />
+    <Content Remove="wwwroot\datasets\filteredRenewalsInfo.xsd" />
+    <Content Remove="wwwroot\datasets\filteredRenewalsInfo.xss" />
+    <Content Remove="wwwroot\datasets\invoices.Designer.cs" />
+    <Content Remove="wwwroot\datasets\invoices.xsc" />
+    <Content Remove="wwwroot\datasets\invoices.xsd" />
+    <Content Remove="wwwroot\datasets\invoices.xss" />
+    <Content Remove="wwwroot\datasets\invoicesInfo.Designer.cs" />
+    <Content Remove="wwwroot\datasets\invoicesInfo.xsc" />
+    <Content Remove="wwwroot\datasets\invoicesInfo.xsd" />
+    <Content Remove="wwwroot\datasets\invoicesInfo.xss" />
+    <Content Remove="wwwroot\datasets\lessors.Designer.cs" />
+    <Content Remove="wwwroot\datasets\lessors.xsc" />
+    <Content Remove="wwwroot\datasets\lessors.xsd" />
+    <Content Remove="wwwroot\datasets\lessors.xss" />
+    <Content Remove="wwwroot\datasets\lessorsInfo.Designer.cs" />
+    <Content Remove="wwwroot\datasets\lessorsInfo.xsc" />
+    <Content Remove="wwwroot\datasets\lessorsInfo.xsd" />
+    <Content Remove="wwwroot\datasets\lessorsInfo.xss" />
+    <Content Remove="wwwroot\datasets\payments.Designer.cs" />
+    <Content Remove="wwwroot\datasets\payments.xsc" />
+    <Content Remove="wwwroot\datasets\payments.xsd" />
+    <Content Remove="wwwroot\datasets\payments.xss" />
+    <Content Remove="wwwroot\datasets\paymentsInfo.Designer.cs" />
+    <Content Remove="wwwroot\datasets\paymentsInfo.xsc" />
+    <Content Remove="wwwroot\datasets\paymentsInfo.xsd" />
+    <Content Remove="wwwroot\datasets\paymentsInfo.xss" />
+    <Content Remove="wwwroot\datasets\renewals.Designer.cs" />
+    <Content Remove="wwwroot\datasets\renewals.xsc" />
+    <Content Remove="wwwroot\datasets\renewals.xsd" />
+    <Content Remove="wwwroot\datasets\renewals.xss" />
+    <Content Remove="wwwroot\datasets\renewalsInfo.Designer.cs" />
+    <Content Remove="wwwroot\datasets\renewalsInfo.xsc" />
+    <Content Remove="wwwroot\datasets\renewalsInfo.xsd" />
+    <Content Remove="wwwroot\datasets\renewalsInfo.xss" />
+    <Content Remove="wwwroot\reports\cars.rdlc" />
+    <Content Remove="wwwroot\reports\filteredRenewals.rdlc" />
+    <Content Remove="wwwroot\reports\invoices.rdlc" />
+    <Content Remove="wwwroot\reports\lessors.rdlc" />
+    <Content Remove="wwwroot\reports\payments.rdlc" />
+    <Content Remove="wwwroot\reports\renewals.rdlc" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="wwwroot\datasets\cars.Designer.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>cars.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="wwwroot\datasets\filteredRenewalsInfo.Designer.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>filteredRenewalsInfo.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="wwwroot\datasets\invoices.Designer.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>invoices.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="wwwroot\datasets\invoicesInfo.Designer.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>invoicesInfo.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="wwwroot\datasets\lessors.Designer.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>lessors.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="wwwroot\datasets\lessorsInfo.Designer.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>lessorsInfo.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="wwwroot\datasets\payments.Designer.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>payments.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="wwwroot\datasets\paymentsInfo.Designer.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>paymentsInfo.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="wwwroot\datasets\renewals.Designer.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>renewals.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="wwwroot\datasets\renewalsInfo.Designer.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>renewalsInfo.xsd</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="wwwroot\reports\cars.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="wwwroot\reports\filteredRenewals.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="wwwroot\reports\invoices.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="wwwroot\reports\lessors.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="wwwroot\reports\payments.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="wwwroot\reports\renewals.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+
+    <PackageReference Include="AspNetCore.Reporting" Version="2.1.0" />
+    <PackageReference Include="ClosedXML" Version="0.102.1" />
+    
+    
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.24" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.24" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.24" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.24" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.24" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.16" />
+    <PackageReference Include="Serilog.AspNetCore" Version="7.0.0" />
+    <PackageReference Include="System.Security.Permissions" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\uploads\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\datasets\cars.xsc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\datasets\cars.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+      <LastGenOutput>cars.Designer.cs</LastGenOutput>
+      <Generator>MSDataSetGenerator</Generator>
+    </None>
+    <None Include="wwwroot\datasets\cars.xss">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\datasets\filteredRenewalsInfo.xsc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\datasets\filteredRenewalsInfo.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+      <LastGenOutput>filteredRenewalsInfo.Designer.cs</LastGenOutput>
+      <Generator>MSDataSetGenerator</Generator>
+    </None>
+    <None Include="wwwroot\datasets\filteredRenewalsInfo.xss">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\datasets\invoices.xsc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\datasets\invoices.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+      <LastGenOutput>invoices.Designer.cs</LastGenOutput>
+      <Generator>MSDataSetGenerator</Generator>
+    </None>
+    <None Include="wwwroot\datasets\invoices.xss">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\datasets\invoicesInfo.xsc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\datasets\invoicesInfo.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+      <LastGenOutput>invoicesInfo.Designer.cs</LastGenOutput>
+      <Generator>MSDataSetGenerator</Generator>
+    </None>
+    <None Include="wwwroot\datasets\invoicesInfo.xss">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\datasets\lessors.xsc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\datasets\lessors.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+      <LastGenOutput>lessors.Designer.cs</LastGenOutput>
+      <Generator>MSDataSetGenerator</Generator>
+    </None>
+    <None Include="wwwroot\datasets\lessors.xss">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\datasets\lessorsInfo.xsc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\datasets\lessorsInfo.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+      <LastGenOutput>lessorsInfo.Designer.cs</LastGenOutput>
+      <Generator>MSDataSetGenerator</Generator>
+    </None>
+    <None Include="wwwroot\datasets\lessorsInfo.xss">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\datasets\payments.xsc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\datasets\payments.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+      <LastGenOutput>payments.Designer.cs</LastGenOutput>
+      <Generator>MSDataSetGenerator</Generator>
+    </None>
+    <None Include="wwwroot\datasets\payments.xss">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\datasets\paymentsInfo.xsc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\datasets\paymentsInfo.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+      <LastGenOutput>paymentsInfo.Designer.cs</LastGenOutput>
+      <Generator>MSDataSetGenerator</Generator>
+    </None>
+    <None Include="wwwroot\datasets\paymentsInfo.xss">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\datasets\renewals.xsc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\datasets\renewals.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+      <LastGenOutput>renewals.Designer.cs</LastGenOutput>
+      <Generator>MSDataSetGenerator</Generator>
+    </None>
+    <None Include="wwwroot\datasets\renewals.xss">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\datasets\renewalsInfo.xsc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\datasets\renewalsInfo.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+      <LastGenOutput>renewalsInfo.Designer.cs</LastGenOutput>
+      <Generator>MSDataSetGenerator</Generator>
+    </None>
+    <None Include="wwwroot\datasets\renewalsInfo.xss">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  
+</Project>

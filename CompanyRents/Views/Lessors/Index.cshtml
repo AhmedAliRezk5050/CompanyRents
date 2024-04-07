@@ -1,0 +1,210 @@
+﻿@using Infrastructure.Utility
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model List<Lessor>
+
+@{
+    ViewData["Title"] = "ايجارات";
+}
+
+<style>
+    .limited-width {
+        max-width: 150px; 
+        word-wrap: break-word; 
+    }
+</style>
+
+<div class="row">
+    <div class="col-12">
+        <h3 class="text-center mb-20">ايجارات</h3>
+        <div class="d-flex flex-row gap-5 mb-5">
+            @if (User.HasClaim("Permission", Permissions.Lessors.Add))
+            {
+                <a asp-action="Create"
+                   class="btn btn-success"
+                   title="اضافة ايجار">
+                    <i class="bi bi-plus-square"></i>
+                </a>
+            }
+            <a
+                type="button"
+                class="btn btn-secondary"
+                data-bs-toggle="modal"
+                data-bs-target="#printLessors"
+                title="طباعة الجهات">
+                <i class="bi bi-printer-fill"></i>
+            </a>
+        </div>
+
+
+        <table class="table table-striped table-bordered table-hover text-center ">
+            <thead>
+            <tr>
+                <th>م</th>
+                <th>اسم الجهة المؤجرة</th>
+                <th>نوع العقار المؤجر</th>
+                <th>المدينة</th>
+                <th>صالة القدوم</th>
+                <th>رقم العقد</th>
+                <th>تاريخ تحرير العقد</th>
+                <th>القيمة</th>
+                <th>مسدد</th>
+                <th>ملاحظات</th>
+                <th>اسم المستخدم</th>
+
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            @{
+                var counter = 0;
+            }
+            @foreach (var lessor in Model)
+            {
+                counter++;
+                <tr>
+                    <td>@counter</td>
+                    <td>@lessor.Name</td>
+                    <td>@lessor.PropertyType</td>
+                    <td>@lessor.City</td>
+                    <td>@lessor.ArrivalHallNumber</td>
+                    <td>@lessor.ContractNumber</td>
+                    <td>@lessor.ContractDateString</td>
+                    <td>@Math.Round(lessor.TotalRentAmount, 2)</td>
+                    <td>@(lessor.IsPaid ? "نعم" : "لا")</td>
+                    <td class="limited-width">@lessor.Notes</td>
+                    <td>@(lessor.User.UserName)</td>
+
+                    <td>
+                        <a class="btn btn-secondary text-white"
+                           asp-action="Details"
+                           asp-route-id="@lessor.Id"
+                           title="تفاصيل">
+                            <i class="bi bi-card-list"></i>
+                        </a>
+                    </td>
+                    <td>
+                        @if (User.HasClaim("Permission", Permissions.Lessors.Edit))
+                        {
+                            <a class="btn btn-warning text-white"
+                               asp-action="Edit" asp-route-id="@lessor.Id"
+                               title="تعديل">
+                                <i class="bi bi-pencil-square"></i>
+                            </a>
+                        }
+                    </td>
+                    <td>
+                        @if (User.HasClaim("Permission", Permissions.Lessors.Delete))
+                        {
+                            <a class="btn btn-danger text-white"
+                               id="deleteLessorBtn"
+                               asp-action="Delete"
+                               asp-route-id="@lessor.Id"
+                               title="حذف">
+                                <i class="bi bi-trash"></i>
+                            </a>
+                        }
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="printLessors" tabindex="-1" aria-labelledby="searchLessorModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-center" id="searchLessorModalLabel">طباعة الجهات</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <form asp-action="GetLessorsPdf" method="get">
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <label class="form-label">من</label>
+                                <input class="form-control" type="date" name="fromDate">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <label class="form-label">الى</label>
+                                <input class="form-control" type="date" name="toDate">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-primary">طباعة</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+
+@section Scripts
+{
+    <script>
+        $(document).ready(function () {
+            const lessorsIndexTempMsg = '@TempData["lessors-index-temp-msg"]';
+
+            if (lessorsIndexTempMsg) {
+                switch (lessorsIndexTempMsg) {
+                    case 'create-success':
+                        Swal.fire({
+                            text: 'تم الاضافة',
+                            icon: 'success',
+                        })
+                        break;
+                    case 'edit-success':
+                        Swal.fire({
+                            text: 'تم التعديل',
+                            icon: 'success',
+                        })
+                        break;
+                    case 'edit-error':
+                        Swal.fire({
+                            text: 'فشل التعديل',
+                            icon: 'error',
+                        })
+                        break;
+                    case 'delete-success':
+                        Swal.fire({
+                            text: 'تم الحذف',
+                            icon: 'success',
+                        })
+                        break;
+                    case 'delete-error':
+                        Swal.fire({
+                            text: 'فشل الحذف',
+                            icon: 'error',
+                        })
+                        break;
+                    case 'unknown-error':
+                        Swal.fire({
+                            text: 'خطأ غير معلوم',
+                            icon: 'error',
+                        })
+                        break;
+                }
+            }
+
+            //------------------------------------------
+            $(document).on('click', '#deleteLessorBtn', function (e) {
+                    debugger;
+                    const result = confirm("هل انت متاكد من حذف الجهة؟");
+                    if (!result) {
+                        e.preventDefault();
+                    }
+                });
+            //------------------------------------------
+        });
+    </script>
+}

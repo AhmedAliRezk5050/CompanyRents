@@ -1,0 +1,30 @@
+﻿@model AdminChangePasswordViewModel
+
+<!-- Modal -->
+<div class="modal fade" id="adminChangePasswordModal" tabindex="-1" aria-labelledby="adminChangePasswordModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="adminChangePasswordModalLabel">تغيير كلمة المرور</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" asp-controller="Users" asp-action="AdminChangePassword">
+                    <div class="mb-3">
+                        <input type="hidden" asp-for="UserId">
+                        <label asp-for="NewPassword"></label>
+                        <input asp-for="NewPassword" class="form-control">
+                        <span class="text-danger" asp-validation-for="NewPassword"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="ConfirmPassword"></label>
+                        <input asp-for="ConfirmPassword" class="form-control">
+                        <span class="text-danger" asp-validation-for="ConfirmPassword"></span>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">تغيير كلمة السر</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,169 @@
+﻿@model EditPaymentViewModel
+
+@{
+    ViewData["Title"] = "تعديل سداد";
+}
+
+<div class="row">
+    <div class="col-12">
+        <h3 class="text-center mb-5">تعديل سداد</h3>
+
+        <form asp-action="Edit" enctype="multipart/form-data" id="myForm">
+            <div class="row mb-3">
+                <div class="col-3">
+                    <label class="form-label" asp-for="InvoiceId"></label>
+                    <select asp-for="InvoiceId" asp-items="Model.InvoiceSelectList" class="form-control" id="invoiceList" disabled>
+                        <option disabled selected>اختار الفاتورة</option>
+                    </select>
+                </div>
+                <div class="col-3" id="invoiceAmountContainer">
+                    <label class="form-label" asp-for="InvoiceAmount"></label>
+                    <input class="form-control" asp-for="InvoiceAmount" disabled>
+                </div>
+                <div class="col-3" id="invoiceTotalPaidAmount">
+                    <label class="form-label" asp-for="InvoiceTotalPaidAmount"></label>
+                    <input class="form-control" asp-for="InvoiceTotalPaidAmount" disabled>
+                </div>
+                <div class="col-3" id="remainingInvoiceAmountContainer">
+                    <label class="form-label" asp-for="RemainingInvoiceAmount"></label>
+                    <input class="form-control" asp-for="RemainingInvoiceAmount" disabled>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-4">
+                    <label class="form-label" asp-for="PaidAmount"></label>
+                    <input class="form-control" asp-for="PaidAmount" disabled>
+                </div>
+                <div class="col-4">
+                    <label class="form-label" asp-for="PaymentType"></label>
+                    <input class="form-control" asp-for="PaymentType">
+                    <span class="text-danger" asp-validation-for="PaymentType"></span>
+                </div>
+                <div class="col-4">
+                    <label class="form-label" asp-for="BankAccountNumber"></label>
+                    <input class="form-control" asp-for="BankAccountNumber">
+                    <span class="text-danger" asp-validation-for="BankAccountNumber"></span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-3">
+                    <label class="form-label" asp-for="Date"></label>
+                    <input class="form-control" asp-for="Date" type="date">
+                    <span class="text-danger" asp-validation-for="Date"></span>
+                </div>
+                <div class="col-3">
+                    <label class="form-label" asp-for="Notes"></label>
+                    <textarea class="form-control" asp-for="Notes"></textarea>
+                </div>
+                <div class="col-3">
+                    <a
+                        class="btn btn-secondary  mt-4"
+                        asp-action="DownloadFile"
+                        asp-controller="Renewals"
+                        asp-route-fileName="@Model.PaymentDocumentFileName">
+                        تحميل المرفق
+                    </a>
+                </div>
+                <div class="col-3">
+                    <label class="form-label" asp-for="PaymentDocumentFile"></label>
+                    <input class="form-control" asp-for="PaymentDocumentFile" accept=".pdf,.jpg,.jpeg,.png">
+                    <span class="text-danger" asp-validation-for="PaymentDocumentFile"></span>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary">تعديل</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts
+{
+
+    <partial name="_ValidationScriptsPartial"/>
+
+    <script>
+         $(document).ready(function () {
+             
+             // const selectedInvoiceId = $('#invoiceList').val(); 
+             // fetchInvoice(selectedInvoiceId);
+             
+             
+              // $('#invoiceList').change(function() { 
+              //        const selectedInvoiceId = $(this).val(); 
+              //        fetchInvoice(selectedInvoiceId);
+              //    });
+              
+              $('#PaidAmount').on('change', function () {
+                   if (!isValidPay()) {
+                       alert('المبلغ المسدد اكبر من المتبقي من قيمة الفانورة');
+                   }
+              });
+              
+              
+               $('#myForm').on('submit', function (e) {
+                   debugger;
+                   const isValidForm = $(this).valid();
+                   const payIsValid = isValidPay();
+                   
+                   
+                  //  if (!payIsValid) {
+                  //     alert('المبلغ المسدد اكبر من المتبقي من قيمة الفانورة');
+                  //     e.preventDefault();
+                  //     return;
+                  // }
+                   
+                  if (isValidForm) {
+                      $('#RemainingInvoiceAmount').prop('disabled', false);
+                      $('#InvoiceId').prop('disabled', false);
+                      $('#InvoiceAmount').prop('disabled', false);
+                      $('#PaidAmount').prop('disabled', false);
+                      
+                  }
+                  
+                });
+               
+               function isValidPay() {
+                    const remainingInvoiceAmount = +$('#RemainingInvoiceAmount').val();
+                    const paidAmount = +$('#PaidAmount').val();
+                    return paidAmount <= remainingInvoiceAmount
+               }
+              
+               function fetchInvoice(selectedInvoiceId) {
+                   $.ajax({
+                    url: '/Payments/FetchInvoice?invoiceId=' + selectedInvoiceId, // replace YourController with your actual controller name
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(data) {
+                        // Check if data is retrieved successfully
+                        if (data !== null && data !== undefined) {
+                            debugger
+                            $('#InvoiceAmount').val(data.amount); // Set the input field value
+                            $('#RemainingInvoiceAmount').val(data.remainingAmount); // Set the input field value
+                            $('#invoiceAmountContainer').show();
+                            $('#remainingInvoiceAmountContainer').show();
+                        } else {
+                            debugger
+                            $('#InvoiceAmount').val('');
+                            $('#RemainingInvoiceAmount').val('');
+                            $('#invoiceAmountContainer').hide();
+                            $('#remainingInvoiceAmountContainer').hide();
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                       $('#InvoiceAmount').val('');
+                       $('#RemainingInvoiceAmount').val('');
+                       $('#invoiceAmountContainer').hide();
+                       $('#remainingInvoiceAmountContainer').hide();
+                    }
+                });
+               }
+               
+             //-----------------------------------------------------------------------
+         });
+         
+    </script>
+}

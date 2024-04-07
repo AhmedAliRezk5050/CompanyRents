@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="lessors" targetNamespace="http://tempuri.org/lessors.xsd" xmlns:mstns="http://tempuri.org/lessors.xsd" xmlns="http://tempuri.org/lessors.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="lessors" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="lessors" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="lessors">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="lessors" msprop:Generator_RowClassName="lessorsRow" msprop:Generator_RowEvHandlerName="lessorsRowChangeEventHandler" msprop:Generator_RowDeletedName="lessorsRowDeleted" msprop:Generator_RowDeletingName="lessorsRowDeleting" msprop:Generator_RowEvArgName="lessorsRowChangeEvent" msprop:Generator_TablePropName="_lessors" msprop:Generator_RowChangedName="lessorsRowChanged" msprop:Generator_UserTableName="lessors" msprop:Generator_RowChangingName="lessorsRowChanging" msprop:Generator_TableClassName="lessorsDataTable" msprop:Generator_TableVarName="tablelessors">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Name" msprop:Generator_UserColumnName="Name" msprop:Generator_ColumnPropNameInTable="NameColumn" msprop:Generator_ColumnPropNameInRow="Name" msprop:Generator_ColumnVarNameInTable="columnName" type="xs:string" minOccurs="0" />
+              <xs:element name="PropertyType" msprop:Generator_UserColumnName="PropertyType" msprop:Generator_ColumnPropNameInTable="PropertyTypeColumn" msprop:Generator_ColumnPropNameInRow="PropertyType" msprop:Generator_ColumnVarNameInTable="columnPropertyType" type="xs:string" minOccurs="0" />
+              <xs:element name="ContractNumber" msprop:Generator_UserColumnName="ContractNumber" msprop:Generator_ColumnPropNameInTable="ContractNumberColumn" msprop:Generator_ColumnPropNameInRow="ContractNumber" msprop:Generator_ColumnVarNameInTable="columnContractNumber" type="xs:string" minOccurs="0" />
+              <xs:element name="TotalRentAmount" msprop:Generator_UserColumnName="TotalRentAmount" msprop:Generator_ColumnPropNameInTable="TotalRentAmountColumn" msprop:Generator_ColumnPropNameInRow="TotalRentAmount" msprop:Generator_ColumnVarNameInTable="columnTotalRentAmount" type="xs:string" minOccurs="0" />
+              <xs:element name="RentPeriod" msprop:Generator_UserColumnName="RentPeriod" msprop:Generator_ColumnPropNameInTable="RentPeriodColumn" msprop:Generator_ColumnPropNameInRow="RentPeriod" msprop:Generator_ColumnVarNameInTable="columnRentPeriod" type="xs:string" minOccurs="0" />
+              <xs:element name="ContractDate" msprop:Generator_UserColumnName="ContractDate" msprop:Generator_ColumnPropNameInTable="ContractDateColumn" msprop:Generator_ColumnPropNameInRow="ContractDate" msprop:Generator_ColumnVarNameInTable="columnContractDate" type="xs:string" minOccurs="0" />
+              <xs:element name="RentStartDate" msprop:Generator_UserColumnName="RentStartDate" msprop:Generator_ColumnPropNameInTable="RentStartDateColumn" msprop:Generator_ColumnPropNameInRow="RentStartDate" msprop:Generator_ColumnVarNameInTable="columnRentStartDate" type="xs:string" minOccurs="0" />
+              <xs:element name="RentEndDate" msprop:Generator_UserColumnName="RentEndDate" msprop:Generator_ColumnPropNameInTable="RentEndDateColumn" msprop:Generator_ColumnPropNameInRow="RentEndDate" msprop:Generator_ColumnVarNameInTable="columnRentEndDate" type="xs:string" minOccurs="0" />
+              <xs:element name="City" msprop:Generator_UserColumnName="City" msprop:Generator_ColumnPropNameInTable="CityColumn" msprop:Generator_ColumnPropNameInRow="City" msprop:Generator_ColumnVarNameInTable="columnCity" type="xs:string" minOccurs="0" />
+              <xs:element name="Index" msprop:Generator_ColumnPropNameInRow="Index" msprop:Generator_ColumnPropNameInTable="IndexColumn" msprop:Generator_ColumnVarNameInTable="columnIndex" msprop:Generator_UserColumnName="Index" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

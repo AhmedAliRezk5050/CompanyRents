@@ -1,0 +1,299 @@
+﻿@model LessorViewModel
+
+
+@{
+    ViewData["Title"] = "اضافة ايجار";
+}
+
+<div class="row">
+    <div class="col-12">
+        <h3 class="text-center mb-5">اضافة ايجار</h3>
+
+        <form asp-action="Create" enctype="multipart/form-data" id="myForm">
+            <div class="row mb-3">
+                <div class="col-4">
+                    <label class="form-label" asp-for="Name"></label>
+                    <input class="form-control" asp-for="Name">
+                    <span class="text-danger" asp-validation-for="Name"></span>
+                </div>
+                <div class="col-4">
+                    <label class="form-label" asp-for="PropertyType"></label>
+                    <input class="form-control" asp-for="PropertyType">
+                    <span class="text-danger" asp-validation-for="PropertyType"></span>
+                </div>
+                <div class="col-4">
+                    <label class="form-label" asp-for="City"></label>
+                    <input class="form-control" asp-for="City">
+                    <span class="text-danger" asp-validation-for="City"></span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-4">
+                    <label class="form-label" asp-for="ArrivalHallNumber"></label>
+                    <input class="form-control" asp-for="ArrivalHallNumber">
+                    <span class="text-danger" asp-validation-for="ArrivalHallNumber"></span>
+                </div>
+                <div class="col-4">
+                    <label class="form-label" asp-for="ContractNumber"></label>
+                    <input class="form-control" asp-for="ContractNumber">
+                    <span class="text-danger" asp-validation-for="ContractNumber"></span>
+                </div>
+                <div class="col-4">
+                    <label class="form-label" asp-for="ContractDateString"></label>
+                    <input class="form-control" asp-for="ContractDateString">
+                    <span class="text-danger" asp-validation-for="ContractDateString"></span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-4 d-flex flex-row align-items-center gap-4">
+                    <div class="">
+                        <label class="form-label" asp-for="RentPeriod"></label>
+                        <input class="form-control" asp-for="RentPeriod">
+                        <span class="text-danger" asp-validation-for="RentPeriod"></span>
+                    </div>
+                    <div class="">
+                        <div class="form-check-inline">
+                            <input class="form-check-input" type="radio" asp-for="PaymentMethod" value="m" id="monthPaymentMethod">
+                            <label class="form-check-label" for="monthPaymentMethod">
+                                شهري
+                            </label>
+                        </div>
+                        <div class="form-check-inline">
+                            <input class="form-check-input" type="radio" asp-for="PaymentMethod" value="y" id="yearPaymentMethod" checked>
+                            <label class="form-check-label" for="yearPaymentMethod">
+                                سنوي
+                            </label>
+                        </div>
+                        <span class="text-danger" asp-validation-for="PaymentMethod"></span>
+                    </div>
+                </div>
+                <div class="col-4 position-relative">
+                    <label class="form-label" asp-for="RentStartDateString"></label>
+                    <input class="form-control" asp-for="RentStartDateString">
+                    <span class="text-danger" asp-validation-for="RentStartDateString"></span>
+                </div>
+                <div class="col-4 position-relative">
+                    <label class="form-label" asp-for="RentEndDateString"></label>
+                    <input class="form-control" asp-for="RentEndDateString">
+                    <span class="text-danger" asp-validation-for="RentEndDateString"></span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-4">
+                    <label class="form-label" asp-for="RentAmount"></label>
+                    <input class="form-control" asp-for="RentAmount">
+                    <span class="text-danger" asp-validation-for="RentAmount"></span>
+                </div>
+                <div class="col-4">
+                    <label class="form-label" asp-for="RentTaxRatio"></label>
+                    <input class="form-control" asp-for="RentTaxRatio">
+                    <span class="text-danger" asp-validation-for="RentTaxRatio"></span>
+                </div>
+                <div class="col-4">
+                    <label class="form-label" asp-for="TotalRentAmount"></label>
+                    <input class="form-control" asp-for="TotalRentAmount" disabled>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-6">
+                    <label class="form-label me-4" asp-for="RentPaymentPeriodType"></label>
+                    <div class="form-check-inline">
+                        <input class="form-check-input" type="radio" asp-for="RentPaymentPeriodType" value="1" id="oneRentPaymentPeriodType">
+                        <label class="form-check-label" for="oneRentPaymentPeriodType">
+                            1
+                        </label>
+                    </div>
+                    <div class="form-check-inline">
+                        <input class="form-check-input" type="radio" asp-for="RentPaymentPeriodType" value="2" id="twoRentPaymentPeriodType">
+                        <label class="form-check-label" for="twoRentPaymentPeriodType">
+                            2
+                        </label>
+                    </div>
+                    <div class="form-check-inline">
+                        <input class="form-check-input" type="radio" asp-for="RentPaymentPeriodType" value="3" id="threeRentPaymentPeriodType">
+                        <label class="form-check-label" for="threeRentPaymentPeriodType">
+                            3
+                        </label>
+                    </div>
+                    <div class="form-check-inline">
+                        <input class="form-check-input" type="radio" asp-for="RentPaymentPeriodType" value="6" id="sixRentPaymentPeriodType">
+                        <label class="form-check-label" for="sixRentPaymentPeriodType">
+                            6
+                        </label>
+                    </div>
+                    <div class="form-check-inline">
+                        <input class="form-check-input" type="radio" asp-for="RentPaymentPeriodType" value="9" id="nineRentPaymentPeriodType">
+                        <label class="form-check-label" for="nineRentPaymentPeriodType">
+                            9
+                        </label>
+                    </div>
+                    <div class="form-check-inline">
+                        <input class="form-check-input" type="radio" asp-for="RentPaymentPeriodType" value="12" checked id="twelveRentPaymentPeriodType">
+                        <label class="form-check-label" for="twelveRentPaymentPeriodType">
+                            12
+                        </label>
+                    </div>
+                    <span class="text-danger" asp-validation-for="PaymentMethod"></span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="form-label" asp-for="ParticipationRatiosLessorViewModels"></label>
+                <div class="col-6" id="participationRatios">
+                    <button type="button" id="btn-add" class="btn btn-secondary text-white btn-sm mb-3">
+                        <i class="bi bi-plus-square"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-6">
+                    <label class="form-label" asp-for="Notes"></label>
+                    <textarea class="form-control" asp-for="Notes"></textarea>
+                </div>
+                <div class="col-6">
+                    <label class="form-label" asp-for="ContractDocumentFile"></label>
+                    <input class="form-control" asp-for="ContractDocumentFile" accept=".pdf,.jpg,.jpeg,.png">
+                    <span class="text-danger" asp-validation-for="ContractDocumentFile"></span>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary">اضافة</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts
+{
+
+    <partial name="_ValidationScriptsPartial"/>
+
+    <script>
+     $(document).ready(function () {
+         
+         
+         $("#ContractDateString").hijriDatePicker();
+         $("#RentStartDateString").hijriDatePicker();
+         $("#RentEndDateString").hijriDatePicker();
+         
+          // $('#RentStartDate, #RentPeriod, #monthPaymentMethod, #yearPaymentMethod').on('change', function () {
+          //     debugger
+          //     const rentStartDate = new Date($('#RentStartDate').val());
+          //     if (!(!isNaN(rentStartDate) && rentStartDate instanceof Date)) {
+          //      return;
+          //     }
+          //    
+          //     const isYearlyPayment = $('#yearPaymentMethod').is(':checked');
+          //    
+          //    
+          //     let rentPeriod = parseInt($('#RentPeriod').val());
+          //    
+          //     if (isYearlyPayment) {
+          //         rentPeriod = rentPeriod * 12;
+          //     }
+          //    
+          //     const updatedRentEndDate = addMonthsToDate(rentStartDate, rentPeriod);
+          //    
+          //     if (rentStartDate) {
+          //         // Update the value of LastInstallmentDate input field
+          //         $('#RentEndDate').val(updatedRentEndDate.toISOString().split('T')[0]);
+          //     }
+          // });
+          
+          
+          $('#RentAmount, #RentTaxRatio').on('change', function () {
+              debugger
+                 const rentAmount = +$('#RentAmount').val();    
+                 const rentTaxRatio = +$('#RentTaxRatio').val();
+                 const totalRentAmountElem = $('#TotalRentAmount');
+                 const totalRentAmount = (rentAmount + (rentAmount * rentTaxRatio)).toFixed();
+                 if (isNaN(totalRentAmount)) {
+                     totalRentAmountElem.val(0);
+                 } else {
+                     totalRentAmountElem.val(totalRentAmount);
+                     }
+            });
+          
+         
+          let index = 0;
+          
+          $('#btn-add').on('click', function () {
+                          const newInputs = `
+                               <div class="row mb-3 ratio-row">
+                                <div class="col-auto">
+                                        <input name="ParticipationRatiosLessorViewModels[${index}].YearNumber" class="form-control" placeholder="السنة" required/>
+                                </div>
+                                <div class="col-auto">
+                                                <input name="ParticipationRatiosLessorViewModels[${index}].Ratio" class="form-control" placeholder="النسبة" required/>
+                                </div>
+                                <div class="col-auto">
+                                        <button type="button" class="btn-delete btn btn-danger">-</button>
+                                </div>
+                                </div>
+                               </div>
+                          `;
+                          $('#participationRatios').append(newInputs);
+                            index++;
+          });
+         
+          
+          
+          // Delete Participation Ratio input fields
+          $(document).on('click', '.btn-delete', function () {
+              index--;
+              $(this).parent().parent().remove();
+              
+            $('.ratio-row').each(function(index) {
+              const row = $(this);
+              const yearInput = row.find('input[name$="YearNumber"]');
+              const ratioInput = row.find('input[name$="Ratio"]');
+              
+              yearInput.attr('name', `ParticipationRatiosLessorViewModels[${index}].YearNumber`);
+              
+              ratioInput.attr('name', `ParticipationRatiosLessorViewModels[${index}].Ratio`);
+                });
+          });
+          
+                      
+          $('#myForm').on('submit', function () {
+                const isValidForm = $(this).valid();
+                
+                 if (isValidForm) {
+                     $('#RentEndDate').prop('disabled', false);
+                 }
+          });
+          
+          
+          function addMonthsToDate(date, monthsToAdd) {
+            const newDate = new Date(date);
+            
+            // Get the current month and year
+            const currentMonth = newDate.getMonth();
+            const currentYear = newDate.getFullYear();
+            
+            // Calculate the new month and year after adding months
+            let newMonth = currentMonth + monthsToAdd;
+            let newYear = currentYear;
+            
+            // Handle overflow or underflow of months
+            while (newMonth >= 12) {
+              newMonth -= 12;
+              newYear++;
+            }
+            while (newMonth < 0) {
+              newMonth += 12;
+              newYear--;
+            }
+            
+            // Set the new month and year
+            newDate.setMonth(newMonth);
+            newDate.setFullYear(newYear);
+            
+            return newDate;
+          }
+          
+     });
+     </script>
+}

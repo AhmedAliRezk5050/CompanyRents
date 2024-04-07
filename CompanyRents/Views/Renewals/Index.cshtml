@@ -1,0 +1,225 @@
+﻿@using Infrastructure.Utility
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model List<RenewalDetailsViewModel>
+
+@{
+    ViewData["Title"] = "التجديدات";
+}
+
+<style>
+    .limited-width {
+        max-width: 150px; 
+        word-wrap: break-word; 
+    }
+</style>
+
+<div class="row">
+    <div class="col-12">
+        <h3 class="text-center mb-20">التجديدات</h3>
+
+        <div class="d-flex flex-row gap-5 mb-5">
+            @if (User.HasClaim("Permission", Permissions.Renewals.Add))
+            {
+                <a
+                    asp-action="Create"
+                    class="btn btn-success"
+                    title="اضافة عقد">
+                    <i class="bi bi-plus"></i>
+                </a>
+            }
+            <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-toggle="modal"
+                data-bs-target="#printRenewals"
+                title="طباعة التجديدات">
+                طباعة التجديدات
+            </button>
+        </div>
+
+        <table class="table table-striped table-bordered table-hover text-center">
+            <thead>
+            <tr>
+                <th>م</th>
+                <th>رقم الاتفاقية</th>
+                <th>رقم العقد</th>
+                <th>تاريخ التوقيع</th>
+                <th>المبلغ</th>
+                <th>نسبة المشاركة</th>
+                <th>المدة (شهر)</th>
+                <th>من</th>
+                <th>الى</th>
+                <th>مسدد</th>
+                <th>ملاحظات</th>
+                <th>اسم المستخدم</th>
+
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+            </thead>
+
+            <tbody>
+            @{
+                var counter = 0;
+            }
+
+            @foreach (var renewal in Model)
+            {
+                counter++;
+
+                <tr>
+                    <td>@counter</td>
+                    <td>@renewal.AgreementNumber</td>
+                    <td>@renewal.ContractNumber</td>
+                    <td>@renewal.AgreementDateString</td>
+                    <td>@renewal.TotalAmount</td>
+                    <td>@renewal.ParticipationRatio</td>
+                    <td>@renewal.RenewalPeriod</td>
+                    <td>@renewal.StartDateString</td>
+                    <td>@renewal.EndDateString</td>
+                    <td>@renewal.IsPaid</td>
+                    <td class="limited-width">@renewal.Notes</td>
+                    <td>@renewal.UserName</td>
+
+                    <td>
+                        <a class="btn btn-secondary text-white"
+                           asp-action="Details"
+                           asp-route-id="@renewal.Id"
+                           title="تفاصيل">
+                            <i class="bi bi-card-list"></i>
+                        </a>
+                    </td>
+                    <td>
+                        @if (User.HasClaim("Permission", Permissions.Renewals.Edit))
+                        {
+                            <a class="btn btn-warning text-white"
+                               asp-action="Edit" asp-route-id="@renewal.Id"
+                               title="تعديل">
+                                <i class="bi bi-pencil-square"></i>
+                            </a>
+                        }
+                    </td>
+                    <td>
+                        @if (User.HasClaim("Permission", Permissions.Renewals.Delete))
+                        {
+                            <a class="btn btn-danger text-white"
+                               id="deleteRenewalBtn"
+                               asp-action="Delete"
+                               asp-route-id="@renewal.Id"
+                               title="حذف">
+                                <i class="bi bi-trash"></i>
+                            </a>
+                        }
+                    </td>
+                </tr>
+            }
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="printRenewals" tabindex="-1" aria-labelledby="searchRenewalModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-center" id="searchRenewalModalLabel">طباعة التجديدات</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <form asp-action="GetRenewalsPdf" method="get">
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <label class="form-label">الجهات</label>
+                                <select name="lessorId" asp-items="@ViewBag.LessorsSelectList" class="form-control">
+                                    <option selected>اختار الجهة</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <label class="form-label">من</label>
+                                <input class="form-control" type="date" name="fromDate">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <label class="form-label">الى</label>
+                                <input class="form-control" type="date" name="toDate">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-primary">طباعة</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+
+@section Scripts
+{
+    <script>
+        $(document).ready(function () {
+            const renewalsIndexTempMsg = '@TempData["renewals-index-temp-msg"]';
+
+            if (renewalsIndexTempMsg) {
+                switch (renewalsIndexTempMsg) {
+                    case 'create-success':
+                        Swal.fire({
+                            text: 'تم الاضافة',
+                            icon: 'success',
+                        })
+                        break;
+                    case 'edit-success':
+                        Swal.fire({
+                            text: 'تم التعديل',
+                            icon: 'success',
+                        })
+                        break;
+                    case 'edit-error':
+                        Swal.fire({
+                            text: 'فشل التعديل',
+                            icon: 'error',
+                        })
+                        break;
+                    case 'delete-success':
+                        Swal.fire({
+                            text: 'تم الحذف',
+                            icon: 'success',
+                        })
+                        break;
+                    case 'delete-error':
+                        Swal.fire({
+                            text: 'فشل الحذف',
+                            icon: 'error',
+                        })
+                        break;
+                    case 'unknown-error':
+                        Swal.fire({
+                            text: 'خطأ غير معلوم',
+                            icon: 'error',
+                        })
+                        break;
+                }
+            }
+
+            //------------------------------------------
+            $(document).on('click', '#deleteRenewalBtn', function (e) {
+                        debugger;
+                        const result = confirm("هل انت متاكد من حذف التجديد؟");
+                        if (!result) {
+                            e.preventDefault();
+                        }
+            });
+            //------------------------------------------
+        });
+    </script>
+}

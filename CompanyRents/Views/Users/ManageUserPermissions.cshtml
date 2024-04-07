@@ -1,0 +1,26 @@
+﻿@model UserClaimsViewModel
+
+@{
+    ViewData["Title"] = "تعديل صلاحيات المستخدمين";
+}
+
+<div class="row">
+    <div class="col-12">
+        <h3 class="text-center mb-5">تعديل صلاحيات المستخدمين</h3>
+
+        <form asp-action="ManageUserPermissions" id="myForm" class="mx-auto">
+            <input type="hidden" asp-for="Id">
+            @for (int i = 0; i < Model.ClaimStatusViewModels.Count; i++)
+            {
+                <div class="p-1">
+                    <input type="hidden" asp-for="ClaimStatusViewModels[i].Value" />
+                    <input type="checkbox" class="form-check-input" asp-for="ClaimStatusViewModels[i].Status" />
+                    <label>@Model.ClaimStatusViewModels[i].Value</label>
+                </div>
+            }
+            <div class="mt-2">
+                <button type="submit" class="btn btn-warning text-white">تعديل</button>
+            </div>
+        </form>
+    </div>
+</div>

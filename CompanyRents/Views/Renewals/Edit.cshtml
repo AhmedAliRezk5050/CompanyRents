@@ -1,0 +1,184 @@
+﻿@model EditRenewalViewModel
+
+@{
+    ViewData["Title"] = "تعديل تجديد";
+}
+
+<div class="row">
+    <div class="col-12">
+        <h3 class="text-center mb-5">تعديل تجديد</h3>
+
+        <form asp-action="Edit" enctype="multipart/form-data" id="myForm">
+            <input type="hidden" asp-for="Id">
+            <div class="row mb-3">
+                <div class="col-4">
+                    <label class="form-label" asp-for="LessorId"></label>
+                    <select asp-for="LessorId" asp-items="Model.LessorSelectList" class="form-control" disabled="@(!ViewBag.CanEditFinances)">
+                        <option disabled selected>اختار العقد</option>
+                    </select>
+                    <span class="text-danger" asp-validation-for="LessorId"></span>
+                </div>
+                <div class="col-4">
+                    <label class="form-label" asp-for="AgreementNumber"></label>
+                    <input class="form-control" asp-for="AgreementNumber">
+                    <span class="text-danger" asp-validation-for="AgreementNumber"></span>
+                </div>
+                <div class="col-4">
+                    <label class="form-label" asp-for="AgreementDateString"></label>
+                    <input class="form-control" asp-for="AgreementDateString">
+                    <span class="text-danger" asp-validation-for="AgreementDateString"></span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-3">
+                    <label class="form-label" asp-for="RenewalPeriod"></label>
+                    <input class="form-control" asp-for="RenewalPeriod">
+                    <span class="text-danger" asp-validation-for="RenewalPeriod"></span>
+                </div>
+                <div class="col-3">
+                    <label class="form-label" asp-for="StartDateString"></label>
+                    <input class="form-control" asp-for="StartDateString">
+                    <span class="text-danger" asp-validation-for="StartDateString"></span>
+                </div>
+                <div class="col-3">
+                    <label class="form-label" asp-for="EndDateString"></label>
+                    <input class="form-control" asp-for="EndDateString">
+                    <span class="text-danger" asp-validation-for="EndDateString"></span>
+                </div>
+                <div class="col-3">
+                    <label class="form-label" asp-for="ParticipationRatio"></label>
+                    <input class="form-control" asp-for="ParticipationRatio">
+                    <span class="text-danger" asp-validation-for="ParticipationRatio"></span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-4">
+                    <label class="form-label" asp-for="Amount"></label>
+                    <input class="form-control" asp-for="Amount" disabled="@(!ViewBag.CanEditFinances)">
+                    <span class="text-danger" asp-validation-for="Amount"></span>
+                </div>
+                <div class="col-4">
+                    <label class="form-label" asp-for="TaxRatio"></label>
+                    <input class="form-control" asp-for="TaxRatio" disabled="@(!ViewBag.CanEditFinances)">
+                    <span class="text-danger" asp-validation-for="TaxRatio"></span>
+                </div>
+                <div class="col-4">
+                    <label class="form-label" asp-for="TotalAmount"></label>
+                    <input class="form-control" asp-for="TotalAmount" disabled>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-4">
+                    <label class="form-label" asp-for="Notes"></label>
+                    <textarea class="form-control" asp-for="Notes"></textarea>
+                </div>
+                <div class="auto">
+                    <a
+                        class="btn btn-secondary  mt-4"
+                        asp-action="DownloadFile"
+                        asp-controller="Renewals"
+                        asp-route-fileName="@Model.AgreementDocumentFileName">
+                        تحميل المرفق
+                    </a>
+                </div>
+                <div class="col-6">
+                    <label class="form-label" asp-for="AgreementDocumentFile"></label>
+                    <input class="form-control" asp-for="AgreementDocumentFile" accept=".pdf,.jpg,.jpeg,.png">
+                    <span class="text-danger" asp-validation-for="AgreementDocumentFile"></span>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary">تعديل</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts
+{
+
+    <partial name="_ValidationScriptsPartial"/>
+
+    <script>
+         $(document).ready(function () {
+             $("#AgreementDateString").hijriDatePicker({ hijri: @Model.StartDateString.Split("-")[0].Length > 3});
+            $("#StartDateString").hijriDatePicker({ hijri: @Model.StartDateString.Split("-").Length > 3});
+            $("#EndDateString").hijriDatePicker({ hijri: @Model.EndDateString.Split("-")[0].Length > 3})
+             
+           //   $('#RenewalPeriod, #StartDate, #EndDate').on('change', function () {
+           //         const renewalStartDate = new Date($('#StartDate').val());
+           //         if (!(!isNaN(renewalStartDate) && renewalStartDate instanceof Date)) {
+           //          return;
+           //         }
+           //        
+           //         let rentPeriod = parseInt($('#RenewalPeriod').val());
+           //        
+           //         const updatedRentEndDate = addMonthsToDate(renewalStartDate, rentPeriod);
+           //        
+           //         if (renewalStartDate) {
+           //             // Update the value of LastInstallmentDate input field
+           //             $('#EndDate').val(updatedRentEndDate.toISOString().split('T')[0]);
+           //         }
+           // });
+             
+             
+         $('#Amount, #TaxRatio').on('change', function () {
+               debugger
+                  const amount = +$('#Amount').val();    
+                  const taxRatio = +$('#TaxRatio').val();
+                  const totalAmountElem = $('#TotalAmount');
+                  const totalAmount = (amount + (amount * taxRatio)).toFixed();
+                  if (isNaN(totalAmount)) {
+                      totalAmountElem.val(0);
+                  } else {
+                      totalAmountElem.val(totalAmount);
+                      }
+         });
+          
+         
+          $('#myForm').on('submit', function () {
+              const isValidForm = $(this).valid();
+            if (isValidForm) {
+                $('#EndDate').prop('disabled', false);
+                $('#Amount').prop('disabled', false);
+                $('#TaxRatio').prop('disabled', false);
+                $('#LessorId').prop('disabled', false);
+            }
+          });
+             
+         function addMonthsToDate(date, monthsToAdd) {
+             const newDate = new Date(date);
+             
+             // Get the current month and year
+             const currentMonth = newDate.getMonth();
+             const currentYear = newDate.getFullYear();
+             
+             // Calculate the new month and year after adding months
+             let newMonth = currentMonth + monthsToAdd;
+             let newYear = currentYear;
+             
+             // Handle overflow or underflow of months
+             while (newMonth >= 12) {
+               newMonth -= 12;
+               newYear++;
+             }
+             while (newMonth < 0) {
+               newMonth += 12;
+               newYear--;
+             }
+             
+             // Set the new month and year
+             newDate.setMonth(newMonth);
+             newDate.setFullYear(newYear);
+             
+             return newDate;
+       }
+                  
+             
+             //----------------------------------------------------------------------------------------
+         });
+    </script>
+}

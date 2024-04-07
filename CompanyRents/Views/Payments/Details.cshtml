@@ -1,0 +1,68 @@
+﻿@model PaymentViewModel
+
+@{
+    ViewData["Title"] = "تفاصيل سداد";
+}
+
+<div class="row">
+    <div class="col-12">
+        <h3 class="text-center mb-5">تفاصيل سداد</h3>
+
+        <form asp-action="Create" enctype="multipart/form-data" id="myForm">
+            <div class="row mb-3">
+                <div class="col-3">
+                    <label class="form-label" asp-for="InvoiceId"></label>
+                    <select asp-for="InvoiceId" asp-items="Model.InvoiceSelectList" class="form-control" id="invoiceList" disabled>
+                        <option disabled selected>اختار الفاتورة</option>
+                    </select>
+                </div>
+                <div class="col-3" id="invoiceAmountContainer">
+                    <label class="form-label" asp-for="InvoiceAmount"></label>
+                    <input class="form-control" asp-for="InvoiceAmount" disabled>
+                </div>
+                <div class="col-3" id="invoiceTotalPaidAmount">
+                    <label class="form-label" asp-for="InvoiceTotalPaidAmount"></label>
+                    <input class="form-control" asp-for="InvoiceTotalPaidAmount" disabled>
+                </div>
+
+                <div class="col-3">
+                    <label class="form-label" asp-for="PaidAmount"></label>
+                    <input class="form-control" asp-for="PaidAmount" disabled>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-4" id="remainingInvoiceAmountContainer">
+                    <label class="form-label" asp-for="RemainingInvoiceAmount"></label>
+                    <input class="form-control" asp-for="RemainingInvoiceAmount" disabled>
+                </div>
+                <div class="col-4">
+                    <label class="form-label" asp-for="PaymentType"></label>
+                    <input class="form-control" asp-for="PaymentType" disabled>
+                </div>
+                <div class="col-4">
+                    <label class="form-label" asp-for="BankAccountNumber"></label>
+                    <input class="form-control" asp-for="BankAccountNumber" disabled>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-4">
+                    <label class="form-label" asp-for="Date"></label>
+                    <input class="form-control" asp-for="Date" type="date" disabled>
+                </div>
+                <div class="col-4">
+                    <label class="form-label" asp-for="Notes"></label>
+                    <textarea class="form-control" asp-for="Notes" disabled></textarea>
+                </div>
+                <div class="col-4">
+                    <a
+                        class="btn btn-secondary"
+                        asp-action="DownloadFile"
+                        asp-controller="Renewals"
+                        asp-route-fileName="@Model.PaymentDocumentFileName">
+                        تحميل المرفق
+                    </a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

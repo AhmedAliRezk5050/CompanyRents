@@ -1,0 +1,165 @@
+﻿@using Infrastructure.Utility
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model List<CompanyRents.Models.UserDetails>
+@inject UserManager<AppUser> UserManager
+
+@{
+    ViewData["Title"] = "المستخدمين";
+}
+
+<div class="row">
+    <div class="col-12">
+        <h3 class="text-center mb-5">المستخدمين</h3>
+        <div class="d-flex flex-row gap-5 mb-5">
+            @if (User.HasClaim("Permission", Permissions.Users.Add))
+            {
+                <a
+                    asp-area="Identity"
+                    asp-page="/Account/Register"
+                    class="btn btn-success"
+                    title="اضافة مستخدم">
+                    <i class="bi bi-plus"></i>
+                </a>
+            }
+        </div>
+        <div class="table-responsive">
+            <table class="table table-striped table-hover text-center table-bordered">
+                <thead>
+                <tr>
+                    <th>م</th>
+                    <th>اسم المستخدم</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                @{
+                    var counter = 0;
+                }
+
+                @foreach (var userDetails in Model)
+                {
+                    counter++;
+                    <tr>
+                        <td>@counter</td>
+                        <td>@userDetails.UserName</td>
+                        <td>
+                            @if (userDetails.IsLockedOut)
+                            {
+                                <a class="btn btn-secondary text-white"
+                                   asp-action="UnLock"
+                                   asp-route-userId="@userDetails.Id"
+                                   title="فتح حساب المستخدم">
+                                    <i class="bi bi-lock-fill"></i>
+
+                                </a>
+                            }
+                            else
+                            {
+                                <a class="btn btn-secondary text-white"
+                                   asp-action="Lock"
+                                   asp-route-userId="@userDetails.Id"
+                                   title="قفل حساب المستخدم">
+                                    <i class="bi bi-unlock-fill"></i>
+                                </a>
+                            }
+                        </td>
+                        <td>
+                            @if (User.HasClaim("Permission", Permissions.Claims.Edit))
+                            {
+                                <a class="btn btn-secondary text-white"
+                                   asp-action="ManageUserPermissions"
+                                   asp-route-userId="@userDetails.Id">
+                                    <i class="bi bi-person-fill-gear"></i>
+                                </a>
+                            }
+                        </td>
+                        <td>
+                            @if (User.HasClaim("Permission", Permissions.Users.Edit))
+                            {
+                                <button type="button"
+                                        id="adminChangePasswordModalToggleBtn"
+                                        class="btn btn-warning text-white"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#adminChangePasswordModal"
+                                        data-user-id="@userDetails.Id">
+                                    <i class="bi bi-key"></i>
+                                </button>
+                            }
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@await Component.InvokeAsync("AdminChangePassword")
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial"/>
+
+    <script>
+    $(document).ready(function () {
+        
+        // ----------------------------------------------------------------------------------------
+        const userIdInput = $('#UserId');
+        $(document).on('click', '#adminChangePasswordModalToggleBtn' , function () {
+            debugger
+            const userId = $(this).data('user-id');
+            userIdInput.val(userId);
+        });
+        // ----------------------------------------------------------------------------------------
+        
+        
+        const usersIndexTempMsg = '@TempData["users-index-temp-msg"]';
+
+        if (usersIndexTempMsg) {
+            switch (usersIndexTempMsg) {
+                case 'create-success':
+                    Swal.fire({
+                        text: 'تم الاضافة',
+                        icon: 'success',
+                    })
+                    break;
+                case 'edit-success':
+                    Swal.fire({
+                        text: 'تم التعديل',
+                        icon: 'success',
+                    })
+                    break;
+                case 'edit-error':
+                    Swal.fire({
+                        text: 'فشل التعديل',
+                        icon: 'error',
+                    })
+                    break;
+                case 'delete-success':
+                    Swal.fire({
+                        text: 'تم الحذف',
+                        icon: 'success',
+                    })
+                    break;
+                case 'delete-error':
+                    Swal.fire({
+                        text: 'فشل الحذف',
+                        icon: 'error',
+                    })
+                    break;
+                case 'unknown-error':
+                    Swal.fire({
+                        text: 'خطأ غير معلوم',
+                        icon: 'error',
+                    })
+                    break;
+            }
+        }
+        
+        
+        // ----------------------------------------------------------------------------------------
+    });
+    </script>
+}

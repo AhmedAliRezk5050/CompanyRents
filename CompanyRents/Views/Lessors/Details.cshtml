@@ -1,0 +1,164 @@
+﻿@model LessorViewModel
+
+
+@{
+    ViewData["Title"] = "تفاصيل الجهة";
+}
+
+<div class="row">
+    <div class="col-12">
+        <h3 class="text-center mb-5">تفاصيل الجهة</h3>
+
+        <form>
+            <div class="row mb-3">
+                <div class="col-4">
+                    <label class="form-label" asp-for="Name"></label>
+                    <input class="form-control" asp-for="Name" disabled>
+                </div>
+                <div class="col-4">
+                    <label class="form-label" asp-for="PropertyType"></label>
+                    <input class="form-control" asp-for="PropertyType" disabled>
+                </div>
+                <div class="col-4">
+                    <label class="form-label" asp-for="City"></label>
+                    <input class="form-control" asp-for="City" disabled>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-4">
+                    <label class="form-label" asp-for="ArrivalHallNumber"></label>
+                    <input class="form-control" asp-for="ArrivalHallNumber" disabled>
+                </div>
+                <div class="col-4">
+                    <label class="form-label" asp-for="ContractNumber"></label>
+                    <input class="form-control" asp-for="ContractNumber" disabled>
+                </div>
+                <div class="col-4">
+                    <label class="form-label" asp-for="ContractDateString"></label>
+                    <input class="form-control" asp-for="ContractDateString" disabled>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-4 d-flex flex-row align-items-center gap-4">
+                    <div class="">
+                        <label class="form-label" asp-for="RentPeriod"></label>
+                        <input class="form-control" asp-for="RentPeriod" disabled>
+                    </div>
+                    <div class="">
+                        <div class="form-check-inline">
+                            <input class="form-check-input" type="radio" asp-for="PaymentMethod" value="m" id="monthPaymentMethod" disabled>
+                            <label class="form-check-label" for="monthPaymentMethod">
+                                شهري
+                            </label>
+                        </div>
+                        <div class="form-check-inline">
+                            <input class="form-check-input" type="radio" asp-for="PaymentMethod" value="y" id="yearPaymentMethod" disabled>
+                            <label class="form-check-label" for="yearPaymentMethod">
+                                سنوي
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <label class="form-label" asp-for="RentStartDateString"></label>
+                    <input class="form-control" asp-for="RentStartDateString" disabled>
+                </div>
+                <div class="col-4">
+                    <label class="form-label" asp-for="RentEndDateString"></label>
+                    <input class="form-control" asp-for="RentEndDateString" disabled>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-4">
+                    <label class="form-label" asp-for="RentAmount"></label>
+                    <input class="form-control" asp-for="RentAmount" disabled>
+                </div>
+                <div class="col-4">
+                    <label class="form-label" asp-for="RentTaxRatio"></label>
+                    <input class="form-control" asp-for="RentTaxRatio" disabled>
+                </div>
+                <div class="col-4">
+                    <label class="form-label" asp-for="TotalRentAmount"></label>
+                    <input class="form-control" asp-for="TotalRentAmount" disabled>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-6">
+                    <label class="form-label me-4" asp-for="RentPaymentPeriodType"></label>
+                    <div class="form-check-inline">
+                        <input class="form-check-input" type="radio" asp-for="RentPaymentPeriodType" value="1" id="oneRentPaymentPeriodType" disabled>
+                        <label class="form-check-label" for="oneRentPaymentPeriodType">
+                            1
+                        </label>
+                    </div>
+                    <div class="form-check-inline">
+                        <input class="form-check-input" type="radio" asp-for="RentPaymentPeriodType" value="2" id="twoRentPaymentPeriodType" disabled>
+                        <label class="form-check-label" for="twoRentPaymentPeriodType">
+                            2
+                        </label>
+                    </div>
+                    <div class="form-check-inline">
+                        <input class="form-check-input" type="radio" asp-for="RentPaymentPeriodType" value="3" id="threeRentPaymentPeriodType" disabled>
+                        <label class="form-check-label" for="threeRentPaymentPeriodType">
+                            3
+                        </label>
+                    </div>
+                    <div class="form-check-inline">
+                        <input class="form-check-input" type="radio" asp-for="RentPaymentPeriodType" value="6" id="sixRentPaymentPeriodType" disabled>
+                        <label class="form-check-label" for="sixRentPaymentPeriodType">
+                            6
+                        </label>
+                    </div>
+                    <div class="form-check-inline">
+                        <input class="form-check-input" type="radio" asp-for="RentPaymentPeriodType" value="9" id="nineRentPaymentPeriodType" disabled>
+                        <label class="form-check-label" for="nineRentPaymentPeriodType">
+                            9
+                        </label>
+                    </div>
+                    <div class="form-check-inline">
+                        <input class="form-check-input" type="radio" asp-for="RentPaymentPeriodType" value="12" id="twelveRentPaymentPeriodType" disabled>
+                        <label class="form-check-label" for="twelveRentPaymentPeriodType">
+                            12
+                        </label>
+                    </div>
+                    <span class="text-danger" asp-validation-for="PaymentMethod"></span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="form-label" asp-for="ParticipationRatiosLessorViewModels"></label>
+                @foreach (var r in Model.ParticipationRatiosLessorViewModels)
+                {
+                    <div class="row mb-3 ratio-row">
+                        <div class="col-auto">
+                            <input value="@r.YearNumber" class="form-control" placeholder="السنة" disabled/>
+                        </div>
+                        <div class="col-auto">
+                            <input value="@r.Ratio" class="form-control" placeholder="النسبة" disabled/>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <label class="form-label" asp-for="Notes"></label>
+                    <textarea class="form-control" asp-for="Notes" disabled></textarea>
+                </div>
+                <div class="col-6">
+                    <a
+                        class="btn btn-secondary"
+                        asp-action="DownloadFile"
+                        asp-controller="Lessors"
+                        asp-route-fileName="@Model.DocumentFileName">
+                        تحميل المرفق
+                    </a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script>
+     </script>
+}

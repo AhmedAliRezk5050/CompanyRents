@@ -1,0 +1,127 @@
+﻿@model InvoiceViewModel
+
+@{
+    ViewData["Title"] = "اضافة فاتورة";
+}
+
+<div class="row">
+    <div class="col-12">
+        <h3 class="text-center mb-5">اضافة فاتورة</h3>
+
+        <form asp-action="Create" enctype="multipart/form-data" id="myForm">
+            <div class="row mb-3">
+                <div class="col-6">
+                    <label class="form-label" asp-for="LessorId"></label>
+                    <select asp-for="LessorId" asp-items="Model.LessorSelectList" class="form-control" id="lessorList">
+                        <option disabled selected>اختار العقد</option>
+                    </select>
+                    <span class="text-danger" asp-validation-for="LessorId"></span>
+                </div>
+
+                <div class="col-6" id="agreementNumberContainer" style="display: none">
+                    <label class="form-label" asp-for="AgreementNumber"></label>
+                    <input class="form-control" asp-for="AgreementNumber" disabled>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-4">
+                    <label class="form-label" asp-for="Number"></label>
+                    <input class="form-control" asp-for="Number">
+                    <span class="text-danger" asp-validation-for="Number"></span>
+                </div>
+                <div class="col-4">
+                    <label class="form-label" asp-for="Amount"></label>
+                    <input class="form-control" asp-for="Amount">
+                    <span class="text-danger" asp-validation-for="Amount"></span>
+                </div>
+                <div class="col-4">
+                    <label class="form-label" asp-for="BankAccountNumber"></label>
+                    <input class="form-control" asp-for="BankAccountNumber">
+                    <span class="text-danger" asp-validation-for="BankAccountNumber"></span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-4">
+                    <label class="form-label" asp-for="InvoiceDate"></label>
+                    <input class="form-control" asp-for="InvoiceDate" type="date">
+                    <span class="text-danger" asp-validation-for="InvoiceDate"></span>
+                </div>
+                <div class="col-4">
+                    <label class="form-label" asp-for="From"></label>
+                    <input class="form-control" asp-for="From" type="date">
+                    <span class="text-danger" asp-validation-for="From"></span>
+                </div>
+                <div class="col-4">
+                    <label class="form-label" asp-for="To"></label>
+                    <input class="form-control" asp-for="To" type="date">
+                    <span class="text-danger" asp-validation-for="To"></span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-6">
+                    <label class="form-label" asp-for="Notes"></label>
+                    <textarea class="form-control" asp-for="Notes"></textarea>
+                </div>
+                <div class="col-6">
+                    <label class="form-label" asp-for="InvoiceDocumentFile"></label>
+                    <input class="form-control" asp-for="InvoiceDocumentFile" accept=".pdf,.jpg,.jpeg,.png">
+                    <span class="text-danger" asp-validation-for="InvoiceDocumentFile"></span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary">اضافة</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts
+{
+
+    <partial name="_ValidationScriptsPartial"/>
+
+    <script>
+         $(document).ready(function () {
+             
+             
+              $('#lessorList').change(function() { 
+                     const selectedLessorId = $(this).val(); 
+                     $.ajax({
+                         url: '/Invoices/FetchNoPaidRenewals?lessorId=' + selectedLessorId, // replace YourController with your actual controller name
+                         type: 'GET',
+                         dataType: 'json',
+                         success: function(data) {
+                             // Check if data is retrieved successfully
+                             if (data !== null && data !== undefined) {
+                                 debugger
+                                 $('#agreementNumberContainer').show();
+                                 $('#AgreementNumber').val(data); // Set the input field value
+                             } else {
+                                 debugger
+                                 $('#AgreementNumber').val('');
+                                 $('#agreementNumberContainer').hide();
+                             }
+                         },
+                         error: function(xhr, status, error) {
+                             $('#AgreementNumber').val('');
+                             $('#agreementNumberContainer').hide();
+                         }
+                     });
+                 });
+              
+              
+               $('#myForm').on('submit', function () {
+                   
+                   const isValidForm = $(this).valid();
+                   if (isValidForm) {
+                       $('#AgreementNumber').prop('disabled', false);
+                   }                                
+                });
+              
+             //-----------------------------------------------------------------------
+         });
+         
+    </script>
+}

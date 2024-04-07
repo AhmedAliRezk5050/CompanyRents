@@ -1,0 +1,24 @@
+body {
+  font-family: 'Cairo', sans-serif;
+  background: #f7f7f7;
+}
+
+* {
+  direction: rtl !important;
+}
+
+.navbar {
+  background-color: #0c1a32 !important;
+}
+
+.navbar_logo {
+  border-radius: 10px;
+}
+
+.navbar_logo-container {
+  max-width: 250px;
+}
+
+.home-logo {
+  border-radius: 20px;
+}
